@@ -1,24 +1,16 @@
 # RoboticArm-ColorTracking
-This project implements a real-time computer vision system using a Raspberry Pi that tracks a colored object and aligns servos using a PID controller. It uses OpenCV for image processing and the HiWonder BusServo SDK for hardware control.
-# Features
-**Color Detection**: Detects objects of a specific color (default: green) in a video stream using LAB color space.<br>
-**PID-Controlled Servo Alignment**: Continuously adjusts servo motors to align the robotic arm to the detected object's center.<br>
-**Coordinate Mapping**: Converts pixel coordinates to real-world coordinates.<br>
-**Modular Design**: Cleanly separated into PID control, hardware abstraction, and image tracking logic.<br>
-# How It Works
-**1.Image Capture:**<br>
-·The camera captures frames using OpenCV.<br>
-**2.Image Processing:**<br>
-·Convert frames to LAB color space.<br>
-·Apply Gaussian blur and morphological transformations.<br>
-·Detect contours of the specified color.<br>
-**3.Object Tracking:**<br>
-·Identify the largest colored object.<br>
-·Draw a bounding box and compute its center.<br>
-·Convert center coordinates to real-world space.<br>
-**4.Servo Adjustment:**<br>
-·Apply PID control based on the distance of the object from the center of the image.<br>
-·Move servos incrementally to keep the object centered.<br>
+This project implements real-time color-based object tracking using computer vision and PID-controlled servo motors. Running on a Raspberry Pi, it detects an object of a specific color and aligns a robotic arm toward it using a feedback loop. The system combines OpenCV image processing, coordinate transformation, and servo control via a modular hardware interface—ideal for robotics and automation experiments.
+# Features & How It Works
+1. **Color Detection:**<br>
+Captures live video and processes it using OpenCV. Converts frames to LAB color space for robust color segmentation. A bounding box and center point are calculated for the largest detected colored object.<br>
+2. **Center Alignment via PID:**<br>
+A PID controller computes the error between the object's position and the image center. This feedback adjusts the servo angles smoothly to center the object.<br>
+3. **Servo Control Integration:**<br>
+Using the Board.py hardware abstraction layer, the system communicates with servo motors over I2C. Both horizontal and vertical servo movements are controlled in real time.<br>
+4. **Coordinate Mapping:**<br>
+Pixel positions are translated into real-world coordinates, making the system suitable for applications like robotic grasping or sorting.<br>
+5. **Modular and Extendable:**<br>
+Components are separated by responsibility—PID logic (PID.py), image tracking (colorTracking.py), and hardware control (Board.py). This makes it easy to expand or modify the system.
 # Running the Code
 ```bash
 python3 colorTracking.py
@@ -42,3 +34,4 @@ Main logic for:<br>
 ·Controlling servos via the Board module<br>
 **Board.py**<br>
 Abstracts low-level communication with the HiWonder bus servo motors using I2C. Also provides LED and motor functions.<br>
+# Screenshot of Object Detection & Contour Highlight in Real-Time
