@@ -36,3 +36,4 @@ Main logic for:<br>
 Abstracts low-level communication with the HiWonder bus servo motors using I2C. Also provides LED and motor functions.<br>
 # Screenshot of Object Detection & Contour Highlight in Real-Time
 ![Demo Screenshot](pic/frame.jpg)
+![Tracking Demo](pic/demo-ezgif.com-resize.gif)
